@@ -2,18 +2,36 @@ name: Daily Hello
 
 on:
   schedule:
-    - cron: "16 9 * * *" # runs every day 02:00 UTC
+    - cron: "34 9 * * *"  # runs every day at 09:10 UTC
   workflow_dispatch:
+
+permissions:
+  contents: write  # allow this workflow to push changes to the repo
 
 jobs:
   run:
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
 
-      - uses: actions/setup-python@v5
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # so we can push back
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
           python-version: "3.11"
 
-      - run: |
-          echo "Hello world from GitHub schedule!"
+      - name: Print hello
+        run: |
+          echo "Hello from scheduled workflow at $(date -u +"%Y-%m-%d %H:%M:%S") UTC"
+
+      - name: Update last_run.txt
+        run: |
+          echo "Last run (UTC): $(date -u +"%Y-%m-%d %H:%M:%S")" > last_run.txt
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add last_run.txt
+          git commit -m "Update last run time" || echo "No changes to commit"
+          git push
