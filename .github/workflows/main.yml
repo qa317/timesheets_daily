@@ -2,7 +2,7 @@ name: Daily Hello
 
 on:
   schedule:
-    - cron: "34 9 * * *"  # runs every day at 09:10 UTC
+    - cron: "00 10 * * *"  # runs every day at 09:10 UTC
   workflow_dispatch:
 
 permissions:
