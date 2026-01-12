@@ -40,7 +40,7 @@ headers = {
     'Content-Type': 'application/json'
 }
 
-credentials = (st.secrets["google"]["credentials"])
+credentials = (st.secrets["google"])
 
 gc = gspread.service_account_from_dict(credentials)
 sheet = gc.open_by_url(gname)
@@ -128,6 +128,7 @@ try:
         st.write(f"Could not load last run time (HTTP status: {response.status_code})")
 except Exception as e:
     st.write("Error while trying to load last run time.")
+
 
 
 
