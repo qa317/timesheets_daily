@@ -33,6 +33,7 @@ last_n_hours=24
 gname = 'https://docs.google.com/spreadsheets/d/1nSJtG7BkgHm-ImRtEagZSzi54TZRh2VzVaBUkUh5HXE/edit?gid=0#gid=0'
 
 api_key = st.secrets["api"]["api_key"]
+st.text(api_key)
 workspace_id0 = ['67c0124e07582d1d96dcb6f9','6596b45a79710760f43ae181','6731a5adf2103568429a76f2']
 
 headers = {
@@ -128,4 +129,5 @@ try:
         st.write(f"Could not load last run time (HTTP status: {response.status_code})")
 except Exception as e:
     st.write("Error while trying to load last run time.")
+
 
