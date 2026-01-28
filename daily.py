@@ -24,7 +24,7 @@ from datetime import datetime, timedelta, timezone
 
 st_date="2026-01-01T00:00:00.000Z"
 end_date="2026-02-01T00:00:00.000Z"
-last_n_hours=24
+last_n_hours=720
 
 
 
@@ -128,6 +128,7 @@ try:
         st.write(f"Could not load last run time (HTTP status: {response.status_code})")
 except Exception as e:
     st.write("Error while trying to load last run time.")
+
 
 
 
